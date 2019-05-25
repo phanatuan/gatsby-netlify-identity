@@ -8,11 +8,18 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
+import {
+  useNetlifyIdentity,
+  IdentityContextProvider,
+} from "react-netlify-identity-widget"
+import "react-netlify-identity-widget/styles.css"
 
 import Header from "./header"
 import "./layout.css"
 
-const Layout = ({ children }) => (
+const Layout = ({ children }) => {
+  const identity = useNetlifyIdentity()
+  return (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -44,7 +51,7 @@ const Layout = ({ children }) => (
       </>
     )}
   />
-)
+)}
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
