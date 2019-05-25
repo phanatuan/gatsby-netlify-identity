@@ -1,8 +1,13 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React from "react"
+import React, {useState} from "react"
+import IdentityModal from 'react-netlify-identity-widget';
 
-const Header = ({ siteTitle }) => (
+
+const Header = ({ siteTitle }) => {
+  const [showDialog, setShowDialog] = useState(false)
+
+  return (
   <header
     style={{
       background: `rebeccapurple`,
@@ -27,9 +32,13 @@ const Header = ({ siteTitle }) => (
           {siteTitle}
         </Link>
       </h1>
+      <button onClick={() => setShowDialog(true)}>
+          Login
+      </button>
     </div>
+    <IdentityModal showDialog={showDialog} onCloseDialog={() => setShowDialog(false)}></IdentityModal>
   </header>
-)
+)}
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
